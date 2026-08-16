@@ -22,6 +22,7 @@
             --accent-secondary: #275720; /* Deep culinary green */
             --border-color: #dee2e6;
             --radius: 8px;
+            --heading-light: #ffffff;
         }
 
         body {
@@ -135,8 +136,9 @@
         /* Section Layout Rules */
         section h2 {
             font-size: 1.4rem;
-            color: #ffffff; /* Forces section titles to be bright white on the dark purple background */
-            border-bottom: 2px solid #3d2242; /* Subtle dark-purple accent line */
+            color: var(--heading-light); /* Uses bright light variable to stand out on dark background */
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4a2352; /* Deep purple accent line for the background */
             padding-bottom: 5px;
         }
 
