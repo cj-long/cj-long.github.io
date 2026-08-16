@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christopher Long | Student Portfolio</title>
     <style>
-        /* Modern Reset and Variables */
+        /* Modern Reset and Layout Variables */
         * {
             margin: 0;
             padding: 0;
@@ -28,75 +28,123 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 60px;
         }
 
-        /* Container Layout */
+        /* Two-Column Master Grid Layout (Desktop) */
         .container {
-            max-width: 800px;
+            display: flex;
+            flex-direction: row;
+            max-width: 1150px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+            gap: 40px;
         }
 
-        /* Header / Hero Section */
+        /* Vertical Left Sidebar / Header Bar */
         header {
-            text-align: center;
-            padding: 40px 20px;
+            flex: 0 0 280px; /* Fixed width for left column */
+            position: sticky;
+            top: 40px; /* Pins sidebar dynamically on scroll */
+            height: fit-content;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
-            margin-bottom: 30px;
+            padding: 30px 24px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: var(--accent-primary);
-            margin-bottom: 5px;
+            line-height: 1.2;
         }
 
         header .subtitle {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
             font-weight: 500;
-            margin-bottom: 15px;
+            margin-top: -15px;
         }
 
-        header .meta-info {
+        /* Vertical Navigation Menu Styles */
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 10px 14px;
+            color: var(--text-main);
+            text-decoration: none;
             font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background-color: #f1f3f5;
+            color: var(--accent-primary);
+        }
+
+        .nav-menu a.active {
+            background-color: #e8f0fe;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* Meta / Contact Info Block inside Sidebar */
+        header .meta-info {
+            font-size: 0.85rem;
             color: var(--text-main);
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        header .meta-info span {
+        header .meta-info .meta-item {
             background: #e9ecef;
-            padding: 4px 12px;
+            padding: 6px 12px;
             border-radius: 20px;
+            text-align: center;
+            font-weight: 500;
         }
 
-        /* Section Layout */
-        section {
-            margin-bottom: 30px;
+        header .meta-info .email-item {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            word-break: break-all;
         }
 
+        /* Main Scrollable Content Column (Right Side) */
+        .main-content {
+            flex: 1; /* Automatically expands to take remaining width */
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Section Layout Rules */
         section h2 {
             font-size: 1.4rem;
             color: var(--accent-primary);
             margin-bottom: 15px;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        /* Activity Cards Grid */
+        /* Activity Cards Layout Grid */
         .grid {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 20px;
         }
 
@@ -104,7 +152,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 24px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -118,13 +166,13 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
             gap: 10px;
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-main);
             font-weight: 600;
         }
@@ -134,7 +182,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: bold;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
             background: #edf2f7;
             color: var(--accent-primary);
@@ -151,7 +199,7 @@
             margin-bottom: 15px;
         }
 
-        /* Embedded Asset/Link Buttons Placeholders */
+        /* Media and Document Embed Button Placeholders */
         .asset-placeholder {
             background: #f1f3f5;
             border: 1px dashed var(--border-color);
@@ -165,7 +213,7 @@
         .btn-link {
             display: inline-block;
             margin-top: 10px;
-            padding: 6px 12px;
+            padding: 6px 14px;
             font-size: 0.85rem;
             font-weight: 500;
             color: #ffffff;
@@ -187,20 +235,56 @@
             background-color: #d35400;
         }
 
-        /* Footer */
+        /* Footer Element */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 20px 0;
             color: var(--text-muted);
             font-size: 0.85rem;
             border-top: 1px solid var(--border-color);
-            margin-top: 40px;
+            margin-top: 20px;
         }
 
-        /* Responsive Breakpoints */
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.8rem; }
-            .container { padding: 10px; }
+        /* Responsive Breakpoint (Tablet & Mobile Screens) */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Collapses sidebar to the top */
+                padding: 15px;
+                gap: 25px;
+            }
+
+            header {
+                flex: 1 1 auto;
+                width: 100%;
+                position: static; /* Unpins sidebar so it scrolls naturally */
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .nav-menu {
+                flex-direction: row; /* Horizontal navigation tabs on mobile */
+                justify-content: space-around;
+                flex-wrap: wrap;
+                gap: 5px;
+                padding: 12px 0;
+            }
+
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            header .meta-info {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            header .meta-info .meta-item {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
         }
     </style>
 </head>
@@ -208,97 +292,108 @@
 
     <div class="container">
         
-        <!-- Header Section -->
+        <!-- Left Side Sticky Header & Navigation Sidebar -->
         <header>
             <h1>Christopher Long</h1>
             <div class="subtitle">High School Student & Disciplined Learner</div>
+            
+            <!-- Structural Vertical Organization Menu -->
+            <nav class="nav-menu">
+                <a href="index.html" class="active">Home</a>
+                <a href="orchestra.html">Orchestra Focus</a>
+                <a href="debate.html">Debate Team</a>
+                <a href="culinary.html">Culinary Club</a>
+            </nav>
+
             <div class="meta-info">
-                <span>Class of 2030</span>
-                <span>[Your School Name Here]</span>
-                <span>Contact: christopher.long@______.___</span>
+                <div class="meta-item">Class of 2030</div>
+                <div class="meta-item">[Your School Name Here]</div>
+                <div class="meta-item email-item">christopher.long@______.___</div>
             </div>
         </header>
 
-        <!-- About Me Section -->
-        <section>
-            <h2>About Me</h2>
-            <div class="card">
-                <p class="card-description" style="margin-bottom: 0;">
-                    Welcome to my personal portfolio tracker! I am a dedicated high school student focusing on building technical skills, logical reasoning, and creative disciplines. Through my commitment to performance arts, competitive argumentation, and practical arts, I look to develop well-rounded skills useful for future academic endeavors.
-                </p>
-            </div>
-        </section>
-
-        <!-- Activities Section -->
-        <section>
-            <h2>Extracurricular Focus Areas</h2>
-            <div class="grid">
-                
-                <!-- Orchestra Card -->
+        <!-- Right Side Scrollable Main Profile Content -->
+        <main class="main-content">
+            
+            <!-- About Me Profile Section -->
+            <section>
+                <h2>About Me</h2>
                 <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Orchestra</div>
-                        <span class="tag">Cellist (Bowed Strings)</span>
-                    </div>
-                    <p class="card-description">
-                        Developing technical musical proficiency, pitch control, and collaborative ensemble alignment through regular practice and scheduled public concert performances.
+                    <p class="card-description" style="margin-bottom: 0;">
+                        Welcome to my personal portfolio tracker! I am a dedicated high school student focusing on building technical skills, logical reasoning, and creative disciplines. Through my commitment to performance arts, competitive argumentation, and practical arts, I look to develop well-rounded skills useful for future academic endeavors.
                     </p>
-                    <!-- Visual/Audio Asset Link Placeholder -->
-                    <div class="asset-placeholder">
-                        🎵 Performance Audio/Video Placeholder
-                        <br>
-                        <a href="#" class="btn-link">View Media Folder (Google Drive / YouTube)</a>
-                    </div>
                 </div>
+            </section>
 
-                <!-- Debate Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Debate Team</div>
-                        <span class="tag">Active Member</span>
+            <!-- Extracurricular Showcase Grid Section -->
+            <section>
+                <h2>Extracurricular Focus Areas</h2>
+                <div class="grid">
+                    
+                    <!-- Orchestra Detail Block -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Orchestra</div>
+                            <span class="tag">Cellist (Bowed Strings)</span>
+                        </div>
+                        <p class="card-description">
+                            Developing technical musical proficiency, pitch control, and collaborative ensemble alignment through regular practice and scheduled public concert performances.
+                        </p>
+                        <div class="asset-placeholder">
+                            🎵 Performance Audio/Video Placeholder
+                            <br>
+                            <a href="orchestra.html" class="btn-link">View Media Folder (Google Drive / YouTube)</a>
+                        </div>
                     </div>
-                    <p class="card-description">
-                        Engaging in evidence-based research, structured case construction, and quick cross-examination adjustments. Focus areas include analyzing complex literature and building analytical blocks.
-                    </p>
-                    <!-- Debate Brief Document Link Placeholder -->
-                    <div class="asset-placeholder">
-                        📄 Research Briefs & Case Files Placeholder
-                        <br>
-                        <a href="#" class="btn-link">View Sample Briefs (View-Only Google Drive)</a>
+
+                    <!-- Debate Team Detail Block -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Debate Team</div>
+                            <span class="tag">Active Member</span>
+                        </div>
+                        <p class="card-description">
+                            Engaging in evidence-based research, structured case construction, and quick cross-examination adjustments. Focus areas include analyzing complex literature and building analytical blocks.
+                        </p>
+                        <div class="asset-placeholder">
+                            📄 Research Briefs & Case Files Placeholder
+                            <br>
+                            <a href="debate.html" class="btn-link">View Sample Briefs (View-Only Google Drive)</a>
+                        </div>
                     </div>
+
+                    <!-- Culinary Club Detail Block -->
+                    <div class="card culinary">
+                        <div class="card-header">
+                            <div class="card-title">Culinary Club</div>
+                            <span class="tag">Active Member</span>
+                        </div>
+                        <p class="card-description">
+                            Practicing fundamental kitchen metrics, recipe replication, safe station logging, and creative plating presentation techniques during club workshops.
+                        </p>
+                        <div class="asset-placeholder">
+                            🍳 Visual Recipe Log Placeholder
+                            <br>
+                            <a href="culinary.html" class="btn-link">Open Recipe Gallery (Notion / Blog)</a>
+                        </div>
+                    </div>
+
                 </div>
+            </section>
 
-                <!-- Culinary Card -->
-                <div class="card culinary">
-                    <div class="card-header">
-                        <div class="card-title">Culinary Club</div>
-                        <span class="tag">Active Member</span>
-                    </div>
-                    <p class="card-description">
-                        Practicing fundamental kitchen metrics, recipe replication, safe station logging, and creative plating presentation techniques during club workshops.
-                    </p>
-                    <!-- Recipe Portfolio Link Placeholder -->
-                    <div class="asset-placeholder">
-                        🍳 Visual Recipe Log Placeholder
-                        <br>
-                        <a href="#" class="btn-link">Open Recipe Gallery (Notion / Blog)</a>
-                    </div>
+            <!-- Institutional ID Verification Layer -->
+            <section style="margin-top: 20px; opacity: 0.65;">
+                <div style="font-size: 0.85rem; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-color); padding: 12px; border-radius: var(--radius);">
+                    Internal Tracking Information Verification Point — Student ID No. #______
                 </div>
+            </section>
 
-            </div>
-        </section>
+            <!-- Main Content Area Footer -->
+            <footer>
+                <p>&copy; 2026 Christopher Long. Hosted securely via GitHub Pages.</p>
+            </footer>
 
-        <!-- Institutional ID Vault (Hidden / Optional section for reference) -->
-        <section style="margin-top: 40px; opacity: 0.65;">
-            <div style="font-size: 0.85rem; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-color); padding: 10px; border-radius: var(--radius);">
-                Internal Tracking Information Verification Point — Student ID No. #______
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2026 Christopher Long. Hosted securely via GitHub Pages.</p>
-        </footer>
+        </main>
 
     </div>
 
