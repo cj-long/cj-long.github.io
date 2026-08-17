@@ -234,6 +234,33 @@
             margin-top: 10px;
             font-size: 0.95rem;
         }
+        .grade-table th, .grade-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .grade-table th {
+            background-color: #f1f3f5;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .grade-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .status-current { background-color: #e3f2fd; color: #0d47a1; }
+        .status-completed { background-color: #e8f5e9; color: #1b5e20; }
+
 
         .card.culinary .btn-link {
             background-color: var(--accent-secondary);
