@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me | Christopher Long</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --bg-color: #240E28;        /* Your dark purple page background */
+            --card-bg: #ffffff;         /* White card/sidebar background */
+            --text-main: #2d212f;       /* Dark charcoal-purple (High contrast on white cards) */
+            --text-muted: #625366;      /* Medium gray-purple for smaller card text */
+            --accent-primary: #341539;   /* Dark purple for text inside the white sidebar */
+            --accent-secondary: #275720; /* Deep culinary green */
+            --border-color: #dee2e6;
+            --radius: 8px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Two-Column Master Grid Layout (Desktop) */
+        .container {
+            display: flex;
+            flex-direction: row;
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+
+        /* Vertical Left Sidebar / Header Bar */
+        header {
+            flex: 0 0 280px;
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 30px 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            line-height: 1.2;
+        }
+
+        header .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: -15px;
+        }
+
+        /* Vertical Navigation Menu Styles */
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 10px 14px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background-color: #f1f3f5;
+            color: var(--accent-primary);
+        }
+
+        /* Active class shifted to Orchestra for this subpage */
+        .nav-menu a.active {
+            background-color: #e8f0fe;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* Meta / Contact Info Block inside Sidebar */
+        header .meta-info {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        header .meta-info .meta-item {
+            background: #e9ecef;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        header .meta-info .email-item {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            word-break: break-all;
+        }
+
+        /* Main Scrollable Content Column (Right Side) */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Section Layout Rules */
+        section h2 {
+            font-size: 1.4rem;
+            color: var(--heading-light); /* Uses bright light variable to stand out on dark background */
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4a2352; /* Deep purple accent line for the background */
+            padding-bottom: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+        }
+
+        /* Responsive Video Container for YouTube/Vimeo embeds */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+            background: #000;
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            background-color: #f8f9fa;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+            background-color: #ffffff;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            width: fit-content;
+            padding: 10px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: var(--accent-primary);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn-submit:hover {
+            background-color: #1d3557; 
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98); 
+        }
+
+        @media (max-width: 768px) {
+            .btn-submit {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-left: 10px;
+            border-left: 2px solid var(--border-color);
+            margin-left: 10px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -17px;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-primary);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--accent-primary);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin: 2px 0;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Breakpoint (Tablet & Mobile) */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+                gap: 25px;
+            }
+
+            header {
+                position: static;
+                width: 100%;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                gap: 5px;
+                padding: 12px 0;
+            }
+
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            header .meta-info {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <div class="card">
+            <form action="https://formsubmit.co" method="POST" class="contact-form">
+            
+                <input type="text" name="_honey" style="display:none">
+            
+                <input type="hidden" name="_captcha" value="false">
+            
+                <input type="hidden" name="_next" value="https://cj-long.github.io/">
+
+                <div class="form-group">
+                    <label for="name">Your Full Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email Here
+
+                    </label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject Line</label>
+                    <input type="text" id="subject" name="_subject" class="form-control" placeholder="Inquiry Regarding Debate / Orchestra" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message Content</label>
+                    <textarea id="message" name="message" class="form-control" placeholder="Type your professional inquiry here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+</body>
