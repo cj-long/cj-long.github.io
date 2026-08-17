@@ -67,10 +67,8 @@
             font-size: 0.95rem;
             color: var(--text-muted);
             font-weight: 500;
-            margin-top: -15px;
         }
 
-        /* Vertical Navigation Menu Styles */
         .nav-menu {
             display: flex;
             flex-direction: column;
@@ -80,6 +78,7 @@
             padding: 20px 0;
         }
 
+    /* Flat links (Like your Home tab) */
         .nav-menu a {
             display: block;
             padding: 10px 14px;
@@ -100,6 +99,91 @@
             background-color: #e8f0fe;
             color: var(--accent-primary);
             font-weight: 600;
+        }
+
+    /* Collapsible Parent Category Dropdown */
+        .nav-dropdown {
+            width: 100%;
+        }
+
+    /* Clickable Parent Text Header ("Extracurriculars") */
+        .nav-dropdown summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 600; /* Bolder weighting to denote Category status */
+            cursor: pointer;
+            border-radius: 6px;
+            list-style: none; /* Strips out ugly default browser arrows */
+            transition: background 0.2s;
+        }
+
+    /* Webkit patch to remove default disclosure arrow in Safari/Chrome */
+        .nav-dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .nav-dropdown summary:hover {
+            background-color: #f1f3f5;
+        }
+
+    /* Adds a modern structural arrow indicator via pure CSS */
+        .nav-dropdown summary::after {
+            content: '▸';
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+    }
+
+    /* Rotates the custom indicator downwards smoothly when uncollapsing */
+        .nav-dropdown[open] summary::after {
+            transform: rotate(90deg);
+            color: var(--accent-primary);
+        }
+
+    /* Inner nest box grouping your sub-items */
+        .nested-links {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-left: 16px; /* Indents child files to create a clear layout hierarchy */
+            margin-top: 4px;
+        }
+
+        .nested-links a {
+            padding: 8px 14px;
+            font-size: 0.9rem; /* Marginally scaled down to emphasize nest alignment */
+        }
+
+    /* MOBILE PREVIEW FIX: Keeps layout crisp when sidebar snaps up top */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-dropdown {
+                width: auto;
+                position: relative;
+            }
+
+            .nested-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: var(--card-bg);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                padding: 8px;
+                z-index: 10;
+                min-width: 160px;
+            }
         }
 
         /* Meta / Contact Info Block inside Sidebar */
@@ -347,13 +431,17 @@
             <h1>Christopher Long</h1>
             <div class="subtitle">High School Student - Freshman</div>
             
-            <!-- Structural Vertical Organization Menu -->
             <nav class="nav-menu">
                 <a href="/" class="active">Home</a>
-                <a href="/extracurricular/orchestra/">Orchestra</a>
-                <a href="/extracurricular/debate">Debate Team</a>
-                <a href="/extracurricular/culinary">Culinary Club</a>
-                <a href="/contact/contact-me">Contact Me</a>
+
+                <details class="nav-dropdown" open>
+                <summary>Extracurriculars</summary>
+                    <div class="nested-links">
+                        <a href="/extracurricular/orchestra/">Orchestra Focus</a>
+                        <a href="/extracurricular/debate">Debate Team</a>
+                        <a href="/extracurricular/culinary">Culinary Club</a>
+                    </div>
+                </details>
             </nav>
 
             <div class="meta-info">
